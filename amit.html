@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Special Notes ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    user-select:none;
+}
+
+body{
+    min-height:100vh;
+    background:#0b0712;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Patrick Hand',cursive;
+    overflow:hidden;
+    padding:10px;
+    position: relative;
+}
+
+/* FLOATING HEARTS BACKGROUND */
+.heart-particle {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.7;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-105vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.book-container{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    height:640px;
+    perspective: 1200px;
+    z-index: 1;
+}
+
+/* UNIFORM FULL PAGE SIZES */
+.page{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.8);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    text-align:center;
+    cursor:pointer;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.8s ease;
+    transform-origin: left center;
+    overflow:hidden;
+    padding:18px 15px;
+}
+
+.page.turned{
+    transform: rotateY(-130deg) translateX(-10%);
+    opacity:0;
+    pointer-events:none;
+}
+
+/* SOLID VIBRANT PAGE COLORS */
+.page1{
+    background: linear-gradient(135deg, #ff758c 0%, #ff9a9e 50%, #fecfef 100%);
+    border:4px solid #ff2a55;
+}
+
+.page2{
+    background: linear-gradient(135deg, #ff85a2 0%, #f7aef8 50%, #e8aeaf 100%);
+    border:4px solid #d81b60;
+}
+
+.page3{
+    background: linear-gradient(135deg, #ff9ebb 0%, #ffb3c6 50%, #ffc6ff 100%);
+    border:4px solid #c2185b;
+}
+
+.page4{
+    background: linear-gradient(135deg, #ff70a6 0%, #ff9770 50%, #ffd670 100%);
+    border:4px solid #e63946;
+}
+
+.page5{
+    background: linear-gradient(135deg, #ff85a2 0%, #b5e2fa 50%, #f72585 100%);
+    border:4px solid #b5179e;
+}
+
+/* NOTEBOOK LINES */
+.ruled-lines{
+    background-image:
+        linear-gradient(90deg, transparent 35px, #ff1493 35px, #ff1493 37px, transparent 37px),
+        linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+    background-size:100% 100%, 100% 30px;
+}
+
+/* SOLID PINK OPAQUE CARD (NO OVERFLOW) */
+.content-box{
+    background: #ffe4e1;
+    border-radius:15px;
+    padding:12px 10px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 2px solid #ffb6c1;
+    overflow: hidden;
+}
+
+.main-heading{
+    font-family:'Dancing Script',cursive;
+    font-size:26px;
+    color:#800020;
+    font-weight:bold;
+}
+
+.para-text{
+    font-family:'Caveat',cursive;
+    font-size:20px;
+    line-height:1.25;
+    color:#2b0011;
+    margin:2px 0;
+}
+
+.shayari-title{
+    font-family:'Dancing Script',cursive;
+    font-size:23px;
+    color:#4a0033;
+    margin-top:4px;
+}
+
+.shayari-box{
+    background: #ffd1dc;
+    border-radius:10px;
+    padding:8px;
+    border-left: 5px solid #ff1493;
+}
+
+.shayari-text{
+    font-family:'Caveat',cursive;
+    font-size:19px;
+    color:#8b0000;
+    font-style:italic;
+    line-height:1.2;
+}
+
+.ul-pink{ text-decoration: underline; text-decoration-color: #ff1493; text-decoration-thickness: 2px; font-weight:bold; }
+.ul-purple{ text-decoration: underline; text-decoration-color: #4b0082; text-decoration-thickness: 2px; font-weight:bold; }
+.ul-gold{ text-decoration: underline; text-decoration-color: #d2691e; text-decoration-thickness: 2px; font-weight:bold; }
+.big-text{ font-size:22px; font-weight:700; }
+
+.sorry-header{
+    font-family:'Dancing Script',cursive;
+    font-size:46px;
+    font-weight:900;
+    color:#c2185b;
+}
+
+.final-title{
+    font-family:'Dancing Script',cursive;
+    font-size:34px;
+    color:#800020;
+}
+
+/* LAST PAGE AMIT NAME */
+.final-name{
+    font-family:'Dancing Script',cursive;
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#ffffff;
+    background: #d81b60;
+    border-radius: 12px;
+    padding: 4px 18px;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.big-heart{ font-size:26px; }
+
+.footer-container {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-footer{ font-size:13px; color:#4a0033; font-weight:bold; }
+.hint-tap{ font-size:13px; color:#800020; font-weight:bold; }
+
+</style>
+</head>
+
+<body>
+
+<div class="heart-particle" style="left: 10%; animation-delay: 0s;">💖</div>
+<div class="heart-particle" style="left: 25%; animation-delay: 2s;">💕</div>
+<div class="heart-particle" style="left: 45%; animation-delay: 4s;">💗</div>
+<div class="heart-particle" style="left: 65%; animation-delay: 1s;">🌸</div>
+<div class="heart-particle" style="left: 80%; animation-delay: 3s;">❤️</div>
+<div class="heart-particle" style="left: 92%; animation-delay: 5s;">💖</div>
+
+<div class="book-container">
+
+<div class="page page1" id="page1" onclick="nextPage(1)" style="z-index:5;">
+    <div class="content-box">
+        <div style="font-size:24px;">💖 💌 💖</div>
+        <div class="main-heading">Mere kuch words hain aapke liye...</div>
+        <p class="para-text">
+            Pata hai, kuch shabd hain jo mujhe aapse kehna hai... Kuch lamhe  aisi hain jo mere paas reh gayi hain, jo mujhe sirf aapke sath bitana tha.
+        </p>
+        <p class="para-text">
+            Ye khali pade panne hain jo mujhe aapki yaado se bharne hain. Chahta toh bahut hoon aapse kehne ke liye, par kya karu... aap itni dur ho ki keh nahi pata hoon.
+        </p>
+        <p class="para-text">
+            Ha, aapne block kar diya hai mujhe... par fir bhi main us id par message karta rehta hoon, is aash mein ki shayad aap kabhi dekh lo. 🥺
+        </p>
+        <div class="shayari-title">✨ Dil Ki Ek Awaaz ✨</div>
+        <div class="shayari-box">
+            <p class="shayari-text">
+                "Khamoshiyon me bhi aapki aahat sunta hoon,<br>
+                Aap dur ho fir bhi har pal paas bunta hoon.<br>
+                Bas aapki yaadon mein khoya rehta hoon." ❤️
+            </p>
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="hint-tap">👉 Tap to slide page 📄</div>
+        <div class="page-footer">- Cover Page -</div>
+    </div>
+</div>
+
+<div class="page page2 ruled-lines" id="page2" onclick="nextPage(2)" style="z-index:4;">
+    <div class="content-box">
+        <div class="main-heading">🌹 Page #2: Special Memories 🌹</div>
+        <p class="para-text">
+            Aap meri life ka sabse <span class="ul-gold big-text">Special Part</span> ho.
+        </p>
+        <p class="para-text">
+            Jab bhi aap gussa hoti ho ya baatein band ho jati hain, toh mera poora din bilkul khali aur udaas sa ho jata hai.
+        </p>
+        <p class="para-text">
+            <span class="ul-pink">Your importance in my life is endless</span>, aur mera irada aapko hurt karne ka kabhi nahi tha.
+        </p>
+    </div>
+    <div class="footer-container">
+        <div class="hint-tap">👉 Tap to turn | 👈 Swipe right for back</div>
+        <div class="page-footer">- 2 -</div>
+    </div>
+</div>
+
+<div class="page page3 ruled-lines" id="page3" onclick="nextPage(3)" style="z-index:3;">
+    <div class="content-box">
+        <div class="main-heading">💭 Page #3: Realization 💭</div>
+        <p class="para-text">
+            Mujhe realize hua ki meri bewakoofiyon se <span class="ul-purple big-text">Aapko Hurt Hua</span>.
+        </p>
+        <p class="para-text">
+            Maine un baato par dhyan nahi diya jo aapke liye important thi. Par main genuinely badalna chahta hoon.
+        </p>
+        <p class="para-text">
+            Main chahta hoon ki humari sari purani baatein aur warmth <span class="ul-gold">Wapas Laut Aaye</span>.
+        </p>
+    </div>
+    <div class="footer-container">
+        <div class="hint-tap">👉 Tap for next page</div>
+        <div class="page-footer">- 3 -</div>
+    </div>
+</div>
+
+<div class="page page4 ruled-lines" id="page4" onclick="nextPage(4)" style="z-index:2;">
+    <div class="content-box">
+        <div class="sorry-header">I AM SORRY ❤️</div>
+        <p class="para-text">
+            Dil se keh raha hoon... <span class="ul-pink big-text">Please Mujhe Maaf Kar Do!</span> 🥺
+        </p>
+        <p class="para-text">
+            Aage se main aapke trust aur feelings ka poora dhyan rakhunga.
+        </p>
+        <p class="para-text">
+            <span class="ul-purple big-text">Kya hum ek nayi shuruaat kar sakte hain? 🌹</span>
+        </p>
+    </div>
+    <div class="footer-container">
+        <div class="hint-tap" style="color:#800020;">👉 Tap for final page</div>
+        <div class="page-footer" style="color:#800020;">- 4 -</div>
+    </div>
+</div>
+
+<div class="page page5 ruled-lines" id="page5" onclick="nextPage(5)" style="z-index:1;">
+    <div class="content-box">
+        <div class="big-heart">💖 ✨ 💖</div>
+        <div class="final-title">Ek Chhoti Si Baat...</div>
+        <p class="para-text">
+            Chahe kuch bhi ho, main bas itna chahta hoon ki meri baat ek baar dil se padh lena. ❤️
+        </p>
+        <p class="para-text">
+            Galti hui hai toh maafi chahta hoon, aur jo bhi achha tha uski respect hamesha rahegi.
+        </p>
+        <div class="big-heart">🌸 💖 🌸</div>
+        
+        <div class="final-name">~ AMIT ❤️</div>
+    </div>
+    <div class="footer-container">
+        <div class="hint-tap" style="color:#800020;">👈 Swipe right to go back</div>
+        <div class="page-footer">- The End -</div>
+    </div>
+</div>
+
+</div>
+
+<script>
+let totalPages = 5;
+
+function nextPage(pageNumber){
+    let currentPage = document.getElementById("page" + pageNumber);
+    if(pageNumber === totalPages){
+        for(let i = 1; i <= totalPages; i++){
+            document.getElementById("page" + i).classList.remove("turned");
+        }
+    } else {
+        currentPage.classList.add("turned");
+    }
+}
+
+let touchstartX = 0;
+let touchendX = 0;
+
+document.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe(){
+    if(touchendX - touchstartX > 50){
+        for(let i = totalPages; i >= 1; i--){
+            let page = document.getElementById("page" + i);
+            if(page.classList.contains("turned")){
+                page.classList.remove("turned");
+                break;
+            }
+        }
+    }
+}
+</script>
+
+</body>
+</html>
